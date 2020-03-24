@@ -5,63 +5,63 @@ namespace sgl {
 
 	Program::Program()
 	{
-#pragma message ("You have to complete this code!")
+		program_id_ = glCreateProgram();
 	}
 
 	Program::~Program()
 	{
-#pragma message ("You have to complete this code!")
+		glDeleteProgram(program_id_);
 	}
 
 	void Program::AddShader(const Shader& shader)
 	{
-#pragma message ("You have to complete this code!")
+		glAttachShader(program_id_, shader.GetId());
 	}
 
 	void Program::LinkShader()
 	{
-#pragma message ("You have to complete this code!")
+		glLinkProgram(program_id_);
 	}
 
 	void Program::Use() const
 	{
-#pragma message ("You have to complete this code!")
+		glUseProgram(program_id_);
 	}
 
 	void Program::UniformBool(const std::string& name, bool value) const
 	{
-#pragma message ("You have to complete this code!")
+		glUniform1i(GetMemoizeUniformLocation(name), (int)value);
 	}
 
 	void Program::UniformInt(const std::string& name, int value) const
 	{
-#pragma message ("You have to complete this code!")
+		glUniform1i(GetMemoizeUniformLocation(name), value);
 	}
 
 	void Program::UniformFloat(const std::string& name, float value) const
 	{
-#pragma message ("You have to complete this code!")
+		glUniform1f(GetMemoizeUniformLocation(name), value);
 	}
 
 	void Program::UniformVector2(
 		const std::string& name, 
 		const sgl::vector2& vec2) const
 	{
-#pragma message ("You have to complete this code!")
+		glUniform2f(GetMemoizeUniformLocation(name), vec2.x, vec2.y);
 	}
 
 	void Program::UniformVector3(
 		const std::string& name, 
 		const sgl::vector3& vec3) const
 	{
-#pragma message ("You have to complete this code!")
+		glUniform3f(GetMemoizeUniformLocation(name), vec3.x, vec3.y, vec3.z);
 	}
 
 	void Program::UniformVector4(
 		const std::string& name, 
 		const sgl::vector4& vec4) const
 	{
-#pragma message ("You have to complete this code!")
+		glUniform4f(GetMemoizeUniformLocation(name), vec4.x, vec4.y, vec4.z, vec4.w);
 	}
 
 	void Program::UniformMatrix(
@@ -69,13 +69,20 @@ namespace sgl {
 		const sgl::matrix& mat,
 		const bool transpose /*= false*/) const
 	{
-#pragma message ("You have to complete this code!")
+		glUniformMatrix4fv(
+			GetMemoizeUniformLocation(name),
+			1,
+			transpose ? GL_TRUE : GL_FALSE,
+			&mat._11);
 	}
 
 	const int Program::GetMemoizeUniformLocation(const std::string& name) const
 	{
-#pragma message ("You have to complete this code!")
-		return -1;
+		if (memoize_map_.find(name) == memoize_map_.end())
+		{
+			memoize_map_[name] = glGetUniformLocation(program_id_, name.c_str());
+		}
+		return memoize_map_[name];
 	}
 
 } // End namespace sgl.

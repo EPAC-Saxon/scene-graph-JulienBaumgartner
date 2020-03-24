@@ -6,7 +6,6 @@
 #include <algorithm>
 #include <numeric>
 #include <functional>
-#include <imgui.h>
 #include <set>
 #include <sdl2/SDL.h>
 #include <GL/glew.h>
