@@ -5,38 +5,59 @@ namespace sgl {
 
 	const sgl::matrix SceneMatrix::GetLocalModel(const double dt) const
 	{
-#pragma message ("You have to complete this code!")
-		return {};
+		if (parent_ != nullptr)
+		{
+			return parent_->GetLocalModel(dt) * matrix_;
+		}
+		return matrix_;
 	}
 
 	const std::shared_ptr<sgl::Mesh> SceneMatrix::GetLocalMesh() const
 	{
-#pragma message ("You have to complete this code!")
-		return {};
+		return nullptr;
 	}
 
 	const sgl::matrix SceneMesh::GetLocalModel(const double dt) const
 	{
-#pragma message ("You have to complete this code!")
-		return {};
+		if (parent_ != nullptr)
+		{
+			return parent_->GetLocalModel(dt);
+		}
+		sgl::matrix m;
+		m.IdentityMatrix();
+		return m;
 	}
 
 	const std::shared_ptr<sgl::Mesh> SceneMesh::GetLocalMesh() const
 	{
-#pragma message ("You have to complete this code!")
-		return { nullptr };
+		return mesh_;
 	}
 
 	void SceneTree::AddNode(
 		const std::shared_ptr<Scene>& node, 
 		const std::shared_ptr<Scene>& parent /*= nullptr*/)
 	{
-#pragma message ("You have to complete this code!")
+		node->SetParent(parent);
+		push_back(node);
 	}
 
 	const std::shared_ptr<Scene> SceneTree::GetRoot() const
 	{
-#pragma message ("You have to complete this code!")
+		std::shared_ptr<Scene> parent = nullptr;
+		for (const auto& node : *this)
+		{
+			if (node->IsRoot())
+			{
+				if (parent == nullptr)
+				{
+					parent = node;
+				}
+				else 
+				{
+					throw std::runtime_error("There is more than one root");
+				}
+			}
+		}
 		return { nullptr };
 	}
 

@@ -32,10 +32,10 @@ namespace sgl {
 
 			}
 
-			point_buffer_.BindCopy(positions.size() * sizeof(float), &positions);
-			normal_buffer_.BindCopy(normals.size() * sizeof(float), &normals);
-			texture_buffer_.BindCopy(textures.size() * sizeof(float), &textures);
-			index_buffer_.BindCopy(indices.size() * sizeof(int), &indices);
+			point_buffer_.BindCopy(positions.size() * sizeof(float), positions.data());
+			normal_buffer_.BindCopy(normals.size() * sizeof(float), normals.data());
+			texture_buffer_.BindCopy(textures.size() * sizeof(float), textures.data());
+			index_buffer_.BindCopy(indices.size() * sizeof(int), indices.data());
 			index_size_ = indices.size();
 
 			glGenVertexArrays(1, &vertex_array_object_);
