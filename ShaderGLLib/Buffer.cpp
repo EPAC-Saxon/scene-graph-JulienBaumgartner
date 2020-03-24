@@ -36,7 +36,7 @@ namespace sgl {
 	{
 		Bind();
 		glBufferData(static_cast<GLenum>(buffer_type_),
-			size * sizeof(float),
+			size,
 			data,
 			GL_STATIC_DRAW);
 		UnBind();
