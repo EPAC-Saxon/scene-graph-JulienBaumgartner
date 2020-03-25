@@ -27,7 +27,7 @@ namespace sgl {
 			0, // This value must be 0.
 			GL_RGBA, // Specify the pixel format.
 			GL_FLOAT, // Specify the type.
-			&image); // Pointer to the array.
+			image.data()); // Pointer to the array.
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
