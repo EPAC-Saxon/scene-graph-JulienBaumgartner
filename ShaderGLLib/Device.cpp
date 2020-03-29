@@ -89,7 +89,7 @@ namespace sgl {
 			const auto& mesh = node->GetLocalMesh();
 			if (mesh != nullptr)
 			{
-				mesh->Draw(*program_, texture_manager_);
+				mesh->Draw(*program_, texture_manager_, node->GetLocalModel(dt));
 			}
 		}
 	}
